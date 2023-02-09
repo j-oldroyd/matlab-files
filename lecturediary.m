@@ -10,8 +10,8 @@ function lecturediary(varargin)
 %   See also: DIARY, DATETIME
 
 if nargin == 0
-    % Default behavior. The filename is the current date.
-    filename = getchardate();
+    % Default behavior. The filename is based on the current date.
+    filename = ['lecture-', getchardate()];
 elseif nargin == 1
     % Check to see if the argument entered is the correct class and
     % produce appropriate filename. Otherwise give an error.
@@ -35,6 +35,6 @@ end
 %% Local function(s)
 function cdate = getchardate()
 % GETCHARDATE Local function that gets the current date and converts it
-% into a character array.
-    cdate = char(datetime("today"));
+% into a character array. Format is Month-day-year.
+    cdate = char(datetime('today', 'Format', 'MMMM-d-yyyy'));
 end
