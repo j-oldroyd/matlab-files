@@ -1,15 +1,19 @@
-%LATEXIFY changes grpahics options to output LaTeX
-%Selecting 'latex' allows use of LaTeX markup such as $\sin x$ in
-%labels and legends by default.
+% LATEXIFY  Script that sets graphics options to output using LaTeX.
+%   Entering 'latex' allows use of LaTeX markup such as $\sin x$ in
+%   labels and legends by default.
 
-%% Asks user to specify whether they want LaTeX output or default output
-opt = input('Enter ''latex'' to LaTeXify plots or ''remove'' to deTeXify:\n');
+%% Ask user for input
+opt = input(['Enter ''latex'' to LaTeXify plots or ''remove'' to ', ...
+             'deTeXify:\n']);
 
-%% Changes text output
+
+
+%% Change output
+% Graphics output.
 set(groot, 'defaulttextinterpreter', opt)
 
-%% Changes axis ticks labels
+% Axis labels.
 set(groot, 'defaultAxesTickLabelInterpreter', opt)
 
-%% Changes legend output
+% Legend text.
 set(groot, 'defaultLegendInterpreter', opt)
