@@ -1,18 +1,36 @@
-function bbrename(ext)
+function bbrename(varargin)
 % BBRENAME Renames files downloaded from Blackboard.
-%   All files in current directory with specified extension will have
-%   Blackboard pre-formatting removed. File extension must be provided as
-%   character array.
+%   BBRENAME() removes Blackboard preformatting from filenames in the
+%   current directory. BBRENAME(ext) removes Blackboard preformatting from
+%   filenames in the current directory with the specified extensions, where
+%   ext is a string array of extensions.
 %
 %   See also: DIR, MOVEFILE
 
 %% Get file information.
-% Place file names of "*.ext" files into a cell array.
-fileExt = ['*.', ext];
-FileInfoStruct = dir(fileExt);
+
+if nargin == 0
+    % If no input arguments, change filenames of all extensions.
+    FileInfoStruct = dir;
+
+    % Now we need to filter out '.' and '..'. This is apparently a holdover
+    % from DOS days. See:
+    % https://www.mathworks.com/matlabcentral/answers/430793-what-are-the-extra-subdirectories-returned-by-dir-function
+    FileInfoStruct = FileInfoStruct(~ismember({FileInfoStruct.name}, ... 
+                                    {'.', '..'}));
+else
+    for i = 1:nargin
+        % Loop through given extensions.
+        ext = char(varargin{i});
+
+        % Place file names of "*.ext" files into a cell array.
+        fileExt = ['*.', ext];
+        FileInfoStruct = dir(fileExt);
+    end
+end
+
 fileNameArray = {FileInfoStruct.name};
 nFiles = length(fileNameArray); % Number of files to change.
-
 
 %% Change filenames.
 prettyNameArray = cell(1, nFiles);
