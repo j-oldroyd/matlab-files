@@ -16,7 +16,7 @@ elseif nargin == 1
     % Check to see if the argument entered is the correct class and
     % produce appropriate filename. Otherwise give an error.
     if ischar(varargin{1}) || isstring(varargin{1})
-        filename = varargin{1};
+        filename = ['lecture-', varargin{1}];
     else
         error(['Incorrect argument class provided.\nThis function ', ...
               'only accepts string or character arrays as arguments, ' ...
