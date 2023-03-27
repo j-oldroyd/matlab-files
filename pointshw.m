@@ -19,11 +19,11 @@ nQuestions = length(pts);
 
 for i = 1:nQuestions
     % Print statement for each question.
-    msg = 'On question %d you earned %d point(s).\n';
+    msg = 'On question %d you earned %.2f point(s).\n';
     fprintf(msg, i, pts(i));
 end
 
 
-totalMsg = 'You''ve earned %d/%d point(s) on this assignment.\n';
+totalMsg = 'You''ve earned %.2f/%d point(s) on this assignment.\n';
 fprintf(totalMsg, sum(pts), total);
 end
