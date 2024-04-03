@@ -19,13 +19,17 @@ if nargin == 0
     FileInfoStruct = FileInfoStruct(~ismember({FileInfoStruct.name}, ... 
                                     {'.', '..'}));
 else
+    FileInfoStruct = struct([]);
     for i = 1:nargin
         % Loop through given extensions.
-        ext = char(varargin{i});
-
-        % Place file names of "*.ext" files into a cell array.
-        fileExt = ['*.', ext];
-        FileInfoStruct = dir(fileExt);
+        ext = ['*.', char(varargin{i})];
+        if ~isempty(dir(ext))
+            if isempty(FileInfoStruct)
+                FileInfoStruct = dir(ext);
+            else
+                FileInfoStruct = [FileInfoStruct; dir(ext)];
+            end
+        end
     end
 end
 
